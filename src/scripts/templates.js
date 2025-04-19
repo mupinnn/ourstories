@@ -38,3 +38,11 @@ export function generateStoriesListLoader() {
 
   return html;
 }
+
+export function generateLoader() {
+  return `
+    <div class="h-40 flex justify-center items-center">
+      <i class="fas fa-spinner animate-spin fa-3x"></i>
+    </div>
+  `;
+}

@@ -9,6 +9,8 @@ export default class Camera {
   #canvasElement;
 
   #takePictureButton;
+  #flipCameraButton;
+  #front = false;
 
   static addNewStream(stream) {
     if (!Array.isArray(window.currentStreams)) {
@@ -103,6 +105,7 @@ export default class Camera {
         video: {
           aspectRatio: 4 / 3,
           deviceId,
+          facingMode: this.#front ? "user" : "environment",
         },
       });
 
@@ -143,6 +146,12 @@ export default class Camera {
     this.#clearCanvas();
   }
 
+  async flip() {
+    this.#front = !this.#front;
+    this.stop();
+    await this.launch();
+  }
+
   #clearCanvas() {
     const context = this.#canvasElement.getContext("2d");
     context.fillStyle = "#AAAAAA";
@@ -174,5 +183,10 @@ export default class Camera {
   addCheeseButtonListener(selector, callback) {
     this.#takePictureButton = document.querySelector(selector);
     this.#takePictureButton.onclick = callback;
+  }
+
+  addFlipButtonListener(selector, callback) {
+    this.#flipCameraButton = document.querySelector(selector);
+    this.#flipCameraButton.onclick = callback();
   }
 }

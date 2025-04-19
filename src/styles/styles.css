@@ -31,14 +31,21 @@
     @apply text-amber-600 underline underline-offset-4;
   }
 
-  input {
-    @apply brutalism-border py-2 px-4 read-only:opacity-65 disabled:opacity-65;
+  input,
+  textarea,
+  select {
+    @apply min-w-0 brutalism-border py-2 px-4 disabled:opacity-65;
+  }
+
+  input,
+  textarea {
+    @apply read-only:opacity-65;
   }
 }
 
 @layer components {
   .btn {
-    @apply brutalism-border inline-flex justify-center items-center py-1.5 px-4 gap-2 font-medium bg-white min-h-11 no-underline disabled:opacity-65;
+    @apply text-black cursor-pointer brutalism-border inline-flex justify-center items-center py-1.5 px-4 gap-2 font-medium bg-white min-h-11 no-underline disabled:opacity-65 disabled:cursor-not-allowed;
   }
 
   .btn-icon {

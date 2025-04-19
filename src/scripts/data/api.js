@@ -41,15 +41,14 @@ export async function login({ email, password }) {
 
 export async function postNewStory({ description, photo, lat, lon }) {
   const formData = new FormData();
-  formData.append("description", description);
+  formData.set("description", description);
   formData.append("photo", photo);
-  formData.append("lat", lat);
-  formData.append("lon", lon);
+  formData.set("lat", lat);
+  formData.set("lon", lon);
 
   const response = await fetch(ENDPOINTS.ADD_STORY, {
     method: "POST",
     headers: {
-      "Content-Type": "multipart/form-data",
       Authorization: `Bearer ${getAccessToken()}`,
     },
     body: formData,

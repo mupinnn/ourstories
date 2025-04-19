@@ -1,23 +1,23 @@
 # TODO
 
-- [] API integration
+- [x] API integration
 - [x] SPA
 - [x] MVP
 - [] Showing data
-  - [] List with minimal one image and three text
+  - [x] List with minimal one image and three text
   - [] Map to show the data location
   - [] Make sure map has marker and popup on click
   - [] Provide the API key in STUDENT.txt
-- [] Create new data
-  - [] Take picure with camera. Make sure the stream is off when not using the camera.
-  - [] Use click and drag for the map to take lat and long.
-- [] Accessibility
-  - [] Skip to content
-  - [] Alt text
-  - [] Make sure form control associated with label
-  - [] Semantic element
+- [x] Create new data
+  - [x] Take picure with camera. Make sure the stream is off when not using the camera.
+  - [x] Use click and drag for the map to take lat and long.
+- [x] Accessibility
+  - [x] Skip to content
+  - [x] Alt text
+  - [x] Make sure form control associated with label
+  - [x] Semantic element
 - [] Custom view transition
-- [] Attractive UI
-  - [] Icon
-- [] Mobile friendly
+- [x] Attractive UI
+  - [x] Icon
+- [x] Mobile friendly
 - [] Map layer control
