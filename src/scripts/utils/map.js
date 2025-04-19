@@ -1,4 +1,13 @@
-import { map, tileLayer, Icon, icon, marker, popup, latLng } from "leaflet";
+import {
+  map,
+  tileLayer,
+  Icon,
+  icon,
+  marker,
+  popup,
+  latLng,
+  control,
+} from "leaflet";
 import markerIcon from "leaflet/dist/images/marker-icon.png";
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png";
 import markerShadow from "leaflet/dist/images/marker-shadow.png";
@@ -94,12 +103,26 @@ export default class Map {
       },
     );
 
+    const tileOsmHot = tileLayer(
+      "https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png",
+      {
+        attribution:
+          '&copy; <a href="http://www.openstreetmap.org/copyright" target="_blank">OpenStreetMap</a> contributors, Tiles style by <a href="https://www.hotosm.org/" target="_blank">Humanitarian OpenStreetMap Team</a> hosted by <a href="https://openstreetmap.fr/" target="_blank">OpenStreetMap France</a>',
+      },
+    );
+
     this.#map = map(document.querySelector(selector), {
       zoom: this.#zoom,
       scrollWheelZoom: false,
       layers: [tileOsm],
       ...options,
     });
+
+    const layerControl = control.layers({
+      OpenStreetMap: tileOsm,
+      "OpenStreetMap.HOT": tileOsmHot,
+    });
+    layerControl.addTo(this.#map);
   }
 
   changeCamera(coordinate, zoomLevel = null) {

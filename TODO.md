@@ -3,11 +3,11 @@
 - [x] API integration
 - [x] SPA
 - [x] MVP
-- [] Showing data
+- [x] Showing data
   - [x] List with minimal one image and three text
-  - [] Map to show the data location
-  - [] Make sure map has marker and popup on click
-  - [] Provide the API key in STUDENT.txt
+  - [x] Map to show the data location
+  - [x] Make sure map has marker and popup on click
+  - [x] Provide the API key in STUDENT.txt
 - [x] Create new data
   - [x] Take picure with camera. Make sure the stream is off when not using the camera.
   - [x] Use click and drag for the map to take lat and long.
@@ -20,4 +20,4 @@
 - [x] Attractive UI
   - [x] Icon
 - [x] Mobile friendly
-- [] Map layer control
+- [x] Map layer control
