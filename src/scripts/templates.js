@@ -1,3 +1,5 @@
+import { showFormattedDate } from "./utils";
+
 export function generateMessageTemplate({ title, message }) {
   return `
     <div class="flex flex-col gap-2 text-center">
@@ -26,6 +28,28 @@ export function generateStoryItemTemplate({
         <p class="line-clamp-1">${description}</p>
       </div>
     </a>
+  `;
+}
+
+export function generateStoryDetailTemplate({
+  name,
+  description,
+  photoUrl,
+  placeName,
+  createdAt,
+}) {
+  return `
+    <img src="${photoUrl}" alt="Story from ${name}" class="w-full h-80 object-cover brutalism-border-accent" />
+
+    <div class="brutalism-border p-4">
+      <h2 class="text-lg font-semibold">${name}</h2>
+      <p class="inline-flex items-center gap-2">
+        <i class="fas fa-map-marker-alt"></i>
+        <span class="line-clamp-1">${placeName}</span>
+      </p>
+      <p class="text-sm text-gray-500">${showFormattedDate(createdAt)}</p>
+      <p class="mt-4">${description}</p>
+    </div>
   `;
 }
 

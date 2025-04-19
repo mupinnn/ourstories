@@ -73,11 +73,11 @@ export async function getAllStory() {
   };
 }
 
-export async function getStoryDetail({ id }) {
+export async function getStoryDetail(id) {
   const response = await fetch(ENDPOINTS.STORY_DETAIL(id), {
     headers: { Authorization: `Bearer ${getAccessToken()}` },
   });
-  const json = response.json();
+  const json = await response.json();
 
   return {
     ...json,
