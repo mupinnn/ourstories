@@ -3,6 +3,30 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif,
     "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+  }
+
+  @keyframes fade-out {
+    to {
+      opacity: 0;
+    }
+  }
+
+  @keyframes slide-to-top {
+    to {
+      transform: translateY(-30px);
+    }
+  }
+
+  @keyframes slide-from-bottom {
+    from {
+      transform: translateY(30px);
+    }
+  }
 }
 
 @utility container {
@@ -40,6 +64,22 @@
   input,
   textarea {
     @apply read-only:opacity-65;
+  }
+
+  ::view-transition-old(root) {
+    animation:
+      fade-out 90ms cubic-bezier(0.4, 0, 1, 1) both,
+      slide-to-top 300ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  ::view-transition-new(root) {
+    animation:
+      fade-in 210ms cubic-bezier(0, 0, 0.2, 1) 90ms both,
+      slide-from-bottom 300ms cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+
+  #main-header {
+    view-transition-name: header;
   }
 }
 

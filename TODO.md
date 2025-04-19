@@ -16,7 +16,7 @@
   - [x] Alt text
   - [x] Make sure form control associated with label
   - [x] Semantic element
-- [] Custom view transition
+- [x] Custom view transition
 - [x] Attractive UI
   - [x] Icon
 - [x] Mobile friendly

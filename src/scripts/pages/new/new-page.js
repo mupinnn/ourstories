@@ -15,7 +15,7 @@ export default class NewPage {
 
   async render() {
     return `
-      <section class="brutalism-border p-4 space-y-4">
+      <section class="brutalism-border p-4 space-y-4 max-w-2xl mx-auto">
         <h1 class="text-2xl font-bold">New story</h1>
         <form id="new-form" class="space-y-6">
           <div class="form-control">
