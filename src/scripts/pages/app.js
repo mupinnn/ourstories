@@ -29,11 +29,15 @@ class App {
     const transition = transitionHelper({
       updateDOM: async () => {
         this.#content.innerHTML = await page.render();
-        await page.afterRender();
       },
     });
 
-    transition.ready.catch(console.error);
+    transition.ready
+      .then(async () => {
+        await page.afterRender();
+      })
+      .catch(console.error);
+
     transition.updateCallbackDone.then(() => {
       scrollTo({ top: 0, behavior: "instant" });
     });

@@ -17,6 +17,15 @@
   box-shadow: 4px 4px 0 0 var(--color-black);
 }
 
+@utility brutalism-border-accent {
+  border-radius: var(--radius-lg);
+  border-width: 2px;
+  border-color: var(--color-black);
+  box-shadow:
+    4px 4px 0 0 var(--color-black),
+    -6px -6px 0 0 var(--color-amber-500);
+}
+
 @layer base {
   a {
     @apply text-amber-600 underline underline-offset-4;
@@ -29,7 +38,7 @@
 
 @layer components {
   .btn {
-    @apply brutalism-border inline-flex justify-center items-center py-1.5 px-4 gap-2 font-medium bg-white min-h-11 disabled:opacity-65;
+    @apply brutalism-border inline-flex justify-center items-center py-1.5 px-4 gap-2 font-medium bg-white min-h-11 no-underline disabled:opacity-65;
   }
 
   .btn-icon {
