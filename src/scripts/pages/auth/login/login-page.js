@@ -8,21 +8,21 @@ export default class LoginPage {
 
   async render() {
     return `
-      <section class="brutalism-border p-4 space-y-4">
-        <h1 class="text-2xl font-bold">Masuk</h1>
+      <section class="brutalism-border p-4 space-y-4 max-w-md mx-auto">
+        <h1 class="text-2xl font-bold">Login</h1>
         <form id="login-form" class="space-y-6">
           <div class="form-control">
             <label for="email">Email</label>
-            <input id="email" name="email" placeholder="Masukkan alamat email Anda . . ." type="email" required />
+            <input id="email" name="email" placeholder="Your email . . ." type="email" required />
           </div>
 
           <div class="form-control">
             <label for="password">Password</label>
-            <input id="password" name="password" placeholder="Masukkan password Anda . . ." type="password" required />
+            <input id="password" name="password" placeholder="Your password . . ." type="password" required />
           </div>
 
-          <button type="submit" class="btn btn-primary" id="login-form-submit-button">Masuk</button>
-          <p>Belum punya akun? <a href="#/register">daftar</a></p>
+          <button type="submit" class="btn btn-primary" id="login-form-submit-button">Login</button>
+          <p>New to OurStories? <a href="#/register">register</a></p>
         </form>
       </section>
     `;

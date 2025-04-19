@@ -8,8 +8,6 @@ import Camera from "./utils/camera";
 document.addEventListener("DOMContentLoaded", async () => {
   const app = new App({
     content: document.querySelector("#main-content"),
-    drawerButton: document.querySelector("#drawer-button"),
-    navigationDrawer: document.querySelector("#navigation-drawer"),
     skipLinkButton: document.querySelector("#skip-link"),
   });
 

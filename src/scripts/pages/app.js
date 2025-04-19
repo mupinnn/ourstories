@@ -1,24 +1,38 @@
 import routes from "../routes/routes";
 import { getActiveRoute } from "../routes/url-parser";
 import { setupSkipToContent, transitionHelper } from "../utils";
+import { getAccessToken, getLogout } from "../utils/auth";
 
 class App {
   #content = null;
-  #drawerButton = null;
-  #navigationDrawer = null;
   #skipLinkButton = null;
 
-  constructor({ navigationDrawer, drawerButton, content, skipLinkButton }) {
+  constructor({ content, skipLinkButton }) {
     this.#content = content;
-    this.#drawerButton = drawerButton;
-    this.#navigationDrawer = navigationDrawer;
     this.#skipLinkButton = skipLinkButton;
 
     this.#init();
   }
 
   #init() {
+    const isLogin = !!getAccessToken();
+    const logoutButton = document.getElementById("logout-button");
+
     setupSkipToContent(this.#skipLinkButton, this.#content);
+
+    if (!isLogin) {
+      logoutButton.classList.toggle("hidden");
+      return;
+    }
+
+    logoutButton.addEventListener("click", (event) => {
+      event.preventDefault();
+
+      if (confirm("Are you sure want to logout?")) {
+        getLogout();
+        location.hash = "/login";
+      }
+    });
   }
 
   async renderPage() {
