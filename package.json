@@ -6,9 +6,11 @@
   "scripts": {
     "dev": "vite --host --port 9091",
     "build": "vite build",
+    "postbuild": "shx rm -rf docs && mkdir docs && shx cp -r dist/. docs",
     "preview": "vite preview"
   },
   "devDependencies": {
+    "shx": "^0.4.0",
     "vite": "^6.2.0"
   },
   "dependencies": {

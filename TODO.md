@@ -21,3 +21,10 @@
   - [x] Icon
 - [x] Mobile friendly
 - [x] Map layer control
+- [] Push notification
+- [] PWA (installable & offline)
+  - Workbox
+  - Web app manifest shortcuts and screenshots
+- [] IndexedDB, CRUD
+- [] Deployment
+- [] Not found page
