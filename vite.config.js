@@ -4,6 +4,7 @@ import tailwindcss from "@tailwindcss/vite";
 
 // https://vitejs.dev/config/
 export default defineConfig({
+  base: "/ourstories",
   root: resolve(__dirname, "src"),
   publicDir: resolve(__dirname, "src", "public"),
   plugins: [tailwindcss()],
