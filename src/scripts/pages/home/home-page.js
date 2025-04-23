@@ -13,10 +13,16 @@ export default class HomePage {
   async render() {
     return `
       <section class="space-y-6">
-        <a href="#/new" class="btn btn-primary">
-          <i class="fas fa-plus"></i>
-          Post a story
-        </a>
+        <div class="flex items-center gap-4">
+          <a href="#/new" class="btn btn-primary">
+            <i class="fas fa-plus"></i>
+            Post a story
+          </a>
+          <button id="subscribe-notif-button" class="btn">
+            <i class="fas fa-bell"></i>
+            Subscribe
+          </button>
+        </div>
         <div id="stories-list"></div>
         <div id="stories-list-loading-container"></div>
       </section>

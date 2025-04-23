@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# used for dev mode purpose
+src/public/sw.js
+
 # Editor directories and files
 .vscode/*
 !.vscode/extensions.json

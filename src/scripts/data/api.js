@@ -7,6 +7,7 @@ const ENDPOINTS = {
   ADD_STORY: `${CONFIG.BASE_URL}/stories`,
   STORY_LIST: `${CONFIG.BASE_URL}/stories`,
   STORY_DETAIL: (id) => `${CONFIG.BASE_URL}/stories/${id}`,
+  SUBSCRIBE: `${CONFIG.BASE_URL}/notifications/subscribe`,
 };
 
 export async function register({ name, email, password }) {
@@ -85,3 +86,43 @@ export async function getStoryDetail(id) {
   };
 }
 
+export async function subscribePushNotification({
+  endpoint,
+  keys: { p256dh, auth },
+}) {
+  const data = JSON.stringify({ endpoint, keys: { p256dh, auth } });
+
+  const response = await fetch(ENDPOINTS.SUBSCRIBE, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getAccessToken()}`,
+    },
+    body: data,
+  });
+  const json = await response.json();
+
+  return {
+    ...json,
+    ok: response.ok,
+  };
+}
+
+export async function unsubscribePushNotification({ endpoint }) {
+  const data = JSON.stringify({ endpoint });
+
+  const response = await fetch(ENDPOINTS.SUBSCRIBE, {
+    method: "DELETE",
+    headers: {
+      "Content-Type": "application/json",
+      Authorization: `Bearer ${getAccessToken()}`,
+    },
+    body: data,
+  });
+  const json = await response.json();
+
+  return {
+    ...json,
+    ok: response.ok,
+  };
+}
