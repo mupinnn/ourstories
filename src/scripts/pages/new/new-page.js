@@ -6,7 +6,7 @@ import Map from "../../utils/map";
 import Camera from "../../utils/camera";
 import { generateLoader } from "../../templates";
 import DB from "../../data/database";
-import { getSearchParams } from "../../routes/url-parser";
+import { getSearchParams, parseActivePathname } from "../../routes/url-parser";
 
 export default class NewPage {
   #presenter = null;
@@ -82,12 +82,6 @@ export default class NewPage {
   }
 
   async #setupForm() {
-    const draftId = getSearchParams("draftId");
-
-    if (draftId) {
-      this.#draft = await this.#presenter.getDraftById(draftId);
-    }
-
     this.#form = document.getElementById("new-form");
     this.#form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -100,12 +94,29 @@ export default class NewPage {
       };
 
       if (event.submitter.name === "saveAsDraft") {
-        await this.#presenter.saveAsDraft({ id: nanoid(), ...data });
+        await this.#presenter.saveAsDraft({
+          id: this.#draft?.id || nanoid(),
+          ...data,
+        });
         return;
       }
 
       await this.#presenter.postNewStory(data);
     });
+
+    const draftId = parseActivePathname().id;
+
+    if (draftId) {
+      this.#draft = await this.#presenter.getDraftById(draftId);
+
+      this.#form.elements.namedItem("description").value =
+        this.#draft.description;
+      this.#form.elements.namedItem("latitude").value = this.#draft.lat;
+      this.#form.elements.namedItem("longitude").value = this.#draft.lon;
+      this.#takenPicture = { blob: this.#draft.photo };
+
+      this.#populateTakenPicture();
+    }
 
     const cameraContainer = document.getElementById("camera-container");
 
@@ -133,6 +144,11 @@ export default class NewPage {
     this.#map = await Map.build("#map", {
       zoom: 15,
       locate: true,
+      ...(this.#draft
+        ? {
+            center: [this.#draft.lat, this.#draft.lon],
+          }
+        : {}),
     });
 
     const centerCoordinate = this.#map.getCenter();

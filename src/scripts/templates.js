@@ -15,9 +15,10 @@ export function generateStoryItemTemplate({
   description,
   photoUrl,
   placeName,
+  url = `#/story/${id}`,
 }) {
   return `
-    <a href="#/story/${id}" class="relative block brutalism-border-accent h-80" data-storyid="${id}">
+    <a href="${url}" class="relative block brutalism-border-accent h-80" data-storyid="${id}">
       <img src="${photoUrl}" alt="Story from ${name}" class="w-full h-full object-cover rounded-md" />
       <div class="absolute inset-0 bg-gray-900/75 p-4 text-white flex flex-col gap-2 justify-end text-sm rounded-md">
         <h2 class="text-lg font-semibold">${name}</h2>
