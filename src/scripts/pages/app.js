@@ -73,7 +73,7 @@ class App {
 
   async renderPage() {
     const url = getActiveRoute();
-    const route = routes[url];
+    const route = routes[url] || routes["/not-found"];
     const page = route();
 
     const transition = transitionHelper({

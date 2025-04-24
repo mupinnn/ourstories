@@ -25,6 +25,6 @@
 - [x] PWA (installable & offline)
   - Workbox
   - Web app manifest shortcuts and screenshots
-- [] IndexedDB, CRUD
+- [x] IndexedDB, CRUD
 - [x] Deployment
-- [] Not found page
+- [x] Not found page

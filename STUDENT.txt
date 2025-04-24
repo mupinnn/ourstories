@@ -1,2 +1,2 @@
-APP_URL=http://localhost:9091
+APP_URL=http://localhost:9091/ourstories/
 MAP_SERVICE_API_KEY=qtQCWquOF8AEDDaMucc0
