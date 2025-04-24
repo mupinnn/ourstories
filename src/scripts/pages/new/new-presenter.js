@@ -1,10 +1,12 @@
 export default class NewPresenter {
   #view;
   #model;
+  #dbModel;
 
-  constructor({ view, model }) {
+  constructor({ view, model, dbModel }) {
     this.#view = view;
     this.#model = model;
+    this.#dbModel = dbModel;
   }
 
   async showNewFormMap() {
@@ -41,5 +43,18 @@ export default class NewPresenter {
     } finally {
       this.#view.toggleSubmitLoadingButton();
     }
+  }
+
+  async saveAsDraft({ id, description, photo, lat, lon }) {
+    try {
+      await this.#dbModel.putStory({ id, description, photo, lat, lon });
+      this.#view.storeSuccessfully();
+    } catch (error) {
+      this.#view.storeFailed(error.message);
+    }
+  }
+
+  async getDraftById(id) {
+    return await this.#dbModel.getStoryById(id);
   }
 }

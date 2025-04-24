@@ -44,3 +44,7 @@ export function getRoute(pathname) {
 export function parsePathname(pathname) {
   return extractPathnameSegments(pathname);
 }
+
+export function getSearchParams(key) {
+  return new URLSearchParams(location.search).get(key);
+}

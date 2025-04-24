@@ -1,13 +1,17 @@
+import { nanoid } from "nanoid";
 import NewPresenter from "./new-presenter";
 import * as StoriesAPI from "../../data/api";
 import { toggleButtonDisabledState } from "../../utils";
 import Map from "../../utils/map";
 import Camera from "../../utils/camera";
 import { generateLoader } from "../../templates";
+import DB from "../../data/database";
+import { getSearchParams } from "../../routes/url-parser";
 
 export default class NewPage {
   #presenter = null;
   #form = null;
+  #draft = null;
   #map = null;
   #camera = null;
   #takenPicture = null;
@@ -15,6 +19,10 @@ export default class NewPage {
 
   async render() {
     return `
+      <a href="#/draft" class="btn btn-primary mb-4" id="new-form-to-draft-button">
+        <i class="fas fa-save"></i>
+        See drafts
+      </a>
       <section class="brutalism-border p-4 space-y-4 max-w-2xl mx-auto">
         <h1 class="text-2xl font-bold">New story</h1>
         <form id="new-form" class="space-y-6">
@@ -52,8 +60,9 @@ export default class NewPage {
             </div>
           </div>
 
-          <div class="flex justify-end items-center gap-2">
+          <div class="flex justify-end items-center gap-4 flex-wrap">
             <a href="#/" class="btn" id="new-form-back-button">Back</a>
+            <button type="submit" name="saveAsDraft" class="btn" id="new-form-submit-draft-button">Save as draft</button>
             <button type="submit" class="btn btn-primary" id="new-form-submit-button">Post!</button>
           </div>
         </form>
@@ -62,13 +71,23 @@ export default class NewPage {
   }
 
   async afterRender() {
-    this.#presenter = new NewPresenter({ view: this, model: StoriesAPI });
+    this.#presenter = new NewPresenter({
+      view: this,
+      model: StoriesAPI,
+      dbModel: DB,
+    });
 
-    this.#setupForm();
+    await this.#setupForm();
     await this.#presenter.showNewFormMap();
   }
 
-  #setupForm() {
+  async #setupForm() {
+    const draftId = getSearchParams("draftId");
+
+    if (draftId) {
+      this.#draft = await this.#presenter.getDraftById(draftId);
+    }
+
     this.#form = document.getElementById("new-form");
     this.#form.addEventListener("submit", async (event) => {
       event.preventDefault();
@@ -79,6 +98,11 @@ export default class NewPage {
         lat: this.#form.elements.namedItem("latitude").value,
         lon: this.#form.elements.namedItem("longitude").value,
       };
+
+      if (event.submitter.name === "saveAsDraft") {
+        await this.#presenter.saveAsDraft({ id: nanoid(), ...data });
+        return;
+      }
 
       await this.#presenter.postNewStory(data);
     });
