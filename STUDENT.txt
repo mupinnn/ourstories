@@ -1,2 +1,3 @@
 APP_URL=http://localhost:9091/ourstories/
+DEPLOYMENT_URL=https://mupinnn.github.io/ourstories/
 MAP_SERVICE_API_KEY=qtQCWquOF8AEDDaMucc0
