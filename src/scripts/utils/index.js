@@ -85,22 +85,3 @@ export function toggleButtonDisabledState(element) {
 export function isServiceWorkerAvailable() {
   return "serviceWorker" in navigator;
 }
-
-export async function registerServiceWorker() {
-  if (!isServiceWorkerAvailable()) {
-    console.log("Service Worker API unsupported");
-    return;
-  }
-
-  try {
-    const registration = await navigator.serviceWorker.register(
-      `${import.meta.env.BASE_URL}${
-        import.meta.env.MODE === "production" ? "/sw.js" : "/dev-sw.js?dev-sw"
-      }`,
-      { type: import.meta.env.MODE === "production" ? "classic" : "module" },
-    );
-    console.log("Service worker registered: ", registration);
-  } catch (error) {
-    console.log("Failed to register service worker: ", error);
-  }
-}

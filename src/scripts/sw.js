@@ -1,16 +1,15 @@
-import { precacheAndRoute } from "workbox-precaching";
+import { cleanupOutdatedCaches, precacheAndRoute } from "workbox-precaching";
+import { clientsClaim } from "workbox-core";
 import { registerRoute } from "workbox-routing";
-import { CacheableResponsePlugin } from "workbox-cacheable-response";
 import {
-  NetworkFirst,
   CacheFirst,
+  NetworkFirst,
   StaleWhileRevalidate,
 } from "workbox-strategies";
 import CONFIG from "./config";
 
-const manifest = self.__WB_MANIFEST;
-
-precacheAndRoute(manifest);
+cleanupOutdatedCaches();
+precacheAndRoute(self.__WB_MANIFEST);
 
 registerRoute(
   ({ url }) => {
@@ -64,6 +63,9 @@ registerRoute(
     cacheName: "maptiler-api",
   }),
 );
+
+self.skipWaiting();
+clientsClaim();
 
 self.addEventListener("push", (event) => {
   console.log("Service worker pushing . . .");
