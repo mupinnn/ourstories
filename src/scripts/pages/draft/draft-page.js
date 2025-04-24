@@ -37,15 +37,31 @@ export default class DraftPage {
     }
 
     const html = stories.reduce((accumulator, story) => {
-      return accumulator.concat(
-        generateStoryItemTemplate({
-          ...story,
-          url: `#/new/${story.id}`,
-        }),
-      );
+      return accumulator.concat(`
+        <div class="space-y-4">
+          <button type="button" data-draftid="${story.id}" class="btn">
+            <i class="fas fa-trash"></i>
+            Delete
+          </button>
+          ${generateStoryItemTemplate({
+            ...story,
+            url: `#/new/${story.id}`,
+          })}
+        </div>
+      `);
     }, "");
 
     this.#draftListEl.innerHTML = `<div class="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-6">${html}</div>`;
+
+    document.querySelectorAll("button[data-draftid]").forEach((el) => {
+      el.addEventListener("click", async (event) => {
+        const draftId = event.target.dataset?.draftid;
+
+        if (confirm("Are you sure want to delete this draft?")) {
+          await this.#presenter.removeDraft(draftId);
+        }
+      });
+    });
   }
 
   populateStoriesListError(message) {

@@ -39,4 +39,13 @@ export default class DraftPresenter {
       this.#view.toggleLoading();
     }
   }
+
+  async removeDraft(id) {
+    try {
+      await this.#dbModel.removeStory(id);
+      await this.showDraftList();
+    } catch (error) {
+      console.log("removeDraft: error: ", error);
+    }
+  }
 }

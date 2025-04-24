@@ -57,4 +57,8 @@ export default class NewPresenter {
   async getDraftById(id) {
     return await this.#dbModel.getStoryById(id);
   }
+
+  async deleteDraft(id) {
+    return await this.#dbModel.removeStory(id);
+  }
 }

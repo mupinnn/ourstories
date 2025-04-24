@@ -101,6 +101,7 @@ export default class NewPage {
         return;
       }
 
+      if (this.#draft) await this.#presenter.deleteDraft(this.#draft?.id);
       await this.#presenter.postNewStory(data);
     });
 
